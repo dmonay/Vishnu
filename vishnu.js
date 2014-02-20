@@ -43,11 +43,33 @@ $(document).ready(function () {
             alert(json.ask);
         }); 
 */
-    
-        $.getJSON("http://api.bls.gov/publicAPI/v1/timeseries/data/EES10140001?callback=?", function (json) {
+    /* Buerau of Labor stats
+        $.getJSON("http://api.bls.gov/publicAPI/v1/timeseries/data/EES10140001", function (json) {
             console.log(json);
             
             }); 
+   */ 
+        
+        /* BLS
+        $.ajax({
+  type: "GET",
+  dataType: 'JSONP',
+  crossDomain: 'true',
+  url: "http://api.bls.gov/publicAPI/v1/timeseries/data/EES10140001" ,
+  success: function( resp ) {
+  console.log(resp);
+  },
+  error: function(error) {
+  alert(error);
+  }
+
+});
+*/     
+        $.getJSON("http://api.stlouisfed.org/fred/category?category_id=125&api_key=0f7b88b817c235dd40e3aae987a9bfb5&file_type=json&callback=?", function (json) {
+            console.log(json);
+            alert(categories.id);
+            }); 
+       
         
         };
     
