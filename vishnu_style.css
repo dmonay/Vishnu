@@ -1,0 +1,67 @@
+body {background-color: #96cbfd;}
+
+#movie1, #movie2 {
+	display: inline-block;
+	width:300px;
+	height:50px;
+	border:1px solid #ff652a;
+	cursor: pointer;
+	font-size: 27px;
+	padding: 10px;
+	text-align: center;
+	background-color: #fd7b84;
+	color: white;
+	border-radius: 10px;
+	margin: 10px;
+}
+
+#movies {
+	width:690px;
+	height:200px;
+	margin:0 auto;
+}
+
+
+
+.wrap {
+	width:950px;
+	height:200px;
+	margin:0 auto;
+}
+
+.hidden {display: none;}
+.visible {display: block;}
+
+#movie1_review, #movie2_review {
+	display: inline-block;
+	width:400px;
+	height:200px;
+	border:1px solid #ff652a;
+	font-size: 27px;
+	padding: 10px;
+	text-align: center;
+	background-color: #fd7b84;
+	color: white;
+	border-radius: 10px;
+	margin: 10px;
+}
+h1 {
+	text-align: center;
+	font-family: 'Monofett', cursive;
+	font-size: 60px;
+	color: #1f514f;
+}
+
+#start, #next {
+	margin: 90px auto 0 auto;
+	width:70px;
+	height:40px;
+	border:1px solid #ff652a;
+	border-radius: 5px;
+	background-color: #fd7b84;
+	font-size: 20px;
+	line-height: 40px;
+	text-align: center;
+	cursor: pointer;
+}
+

@@ -6,6 +6,8 @@
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>    
     <script type="text/javascript" src="vishnu.js"></script>
 	<link rel="stylesheet" type="text/css" href="vishnu_style.css">
+    <link href='http://fonts.googleapis.com/css?family=Monofett' rel='stylesheet' type='text/css'>
+    
     <!--
     <link rel="stylesheet" href="css/ui-lightness/jquery-ui-1.10.4.custom.css" />
     <script src="js/jquery-ui-1.10.4.custom.min.js"></script>
@@ -14,9 +16,16 @@
 	
 </head>
 <body>
-	 
-    <input type="button" value="Click"/>
-    
-    <div id="test1"></div>
+	 <h1>Which movie is better?</h1>
+    <div id="start">Start</div>
+    <div id="movies" class="hidden">
+        <div id="movie1"></div>
+        <div id="movie2"></div>    
+    </div>
+    <div id ="reviews" class="wrap hidden">
+        <div id="movie1_review"></div>
+        <div id="movie2_review"></div>    
+    </div>
+    <div id="next" class ="hidden">Next</div>
 </body>
 </html>

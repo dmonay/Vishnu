@@ -1,79 +1,104 @@
-/*jslint browser: true*/
-/*global $, jQuery*/
 
 
+var a = 0;
+var b = 0;
+var review1 = "";
+var review2 = "";
 
 $(document).ready(function () {     
-
     
-    var getIt = function () {
-   
-        
-/* NBA
-        $.getJSON("http://api.espn.com/v1/sports/basketball/nba/teams/?apikey=wcgk3dhm3taa7euvtmgusazs", function (json) {
+    /*    $.getJSON("http://api.rottentomatoes.com/api/public/v1.0/movies/770672122/reviews.json?review_type=top_critic&page_limit=20&page=1&country=us&apikey=c8vcknsryddyty8xreagauub", function (json) {
             console.log(json);
-            
-            alert(json.sports[0].leagues[0].teams[0].links.api.news.href);
-            
-            var abc = json.sports[0].leagues[0].teams[0].links.web.teams.href;
-            $('#link1').attr('href', abc);
-            $('#link2').html(); 
-            $('#lnk3').html(); 
-            });
-*/
- 
-        
-/*  NCAA
-  
-  $.getJSON("http://api.espn.com/v1/sports/basketball/mens-college-basketball/athletes/?apikey=wcgk3dhm3taa7euvtmgusazs", function (json) {
-            console.log(json);
-             
-            
-            
-            for (var i = 0; i < json.sports[0].leagues[0].athletes.length; i++) {
-            var weight = json.sports[0].leagues[0].athletes[i].weight;
-            $('#test1').html(weight);
-      }      
-        }
-                 ); 
-                 */
-/* Bitcoin        
-        $.getJSON("https://api.bitcoinaverage.com/ticker/global/USD/", function (json) {
-            console.log(json);
-            alert(json.ask);
-        }); 
-*/
-    /* Buerau of Labor stats
-        $.getJSON("http://api.bls.gov/publicAPI/v1/timeseries/data/EES10140001", function (json) {
-            console.log(json);
-            
             }); 
-   */ 
-        
-        /* BLS
+            */
+    
+
+
+    var start = function () {
+        $("#start").addClass("hidden"); 
+        $("#movies").removeClass('hidden').addClass("visible"); 
+        var x = Math.floor(Math.random()*26);
+        var y = Math.floor(Math.random() * (26)) + 25;      
         $.ajax({
-  type: "GET",
-  dataType: 'JSONP',
-  crossDomain: 'true',
-  url: "http://api.bls.gov/publicAPI/v1/timeseries/data/EES10140001" ,
-  success: function( resp ) {
-  console.log(resp);
-  },
-  error: function(error) {
-  alert(error);
-  }
+            type: "GET",
+            dataType: 'JSONP',
+            crossDomain: 'true',
+            url: "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?limit=50&country=us&apikey=c8vcknsryddyty8xreagauub",
+            success: function (resp) {
+                console.log(resp);
+                var movieA = resp.movies[x].title;
+                var movieB = resp.movies[y].title;
+                var ratingA = resp.movies[x].ratings.critics_score;
+                var ratingB = resp.movies[y].ratings.critics_score;
+                $('#movie1').html(movieA);
+                $('#movie2').html(movieB);
+                a = ratingA;
+                b = ratingB;
+                review1 = resp.movies[x].critics_consensus;
+                review2 = resp.movies[y].critics_consensus;
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });      
+    };
 
-});
-*/     
-        $.getJSON("http://api.stlouisfed.org/fred/category?category_id=125&api_key=0f7b88b817c235dd40e3aae987a9bfb5&file_type=json&callback=?", function (json) {
-            console.log(json);
-            alert(categories.id);
-            }); 
-       
-        
-        };
-    
-    $('input').click(getIt);
+    var deliverReview = function() {
+        $("#reviews").removeClass('hidden').addClass("visible");
+        $('#movie1_review').html(review1);
+        $('#movie2_review').html(review2);
+
+        console.log(review1);
+        console.log(review2);
+        $("#next").removeClass('hidden').addClass("visible");
+    };
+
+    var initiate1 = function() {
+        if (a > b) {alert('victory');} else{alert('defeat');};
+        deliverReview();
+
+    };
+
+    var initiate2 = function() {
+        if (b > a) {alert('victory');} else{alert('defeat');};
+        deliverReview();
+    };
+ 
+    var next = function() {
+        $('#movie1_review').empty();
+        $('#movie2_review').empty();
+        $('#reviews').removeClass('visible').addClass('hidden');
+        $("#next").removeClass('visible').addClass("hidden");
+        var x = Math.floor(Math.random()*26);
+        var y = Math.floor(Math.random() * (26)) + 25;
+        $.ajax({
+            type: "GET",
+            dataType: 'JSONP',
+            crossDomain: 'true',
+            url: "http://api.rottentomatoes.com/api/public/v1.0/lists/movies/box_office.json?limit=50&country=us&apikey=c8vcknsryddyty8xreagauub",
+            success: function (resp) {
+                console.log(resp);
+                var movieA = resp.movies[x].title;
+                var movieB = resp.movies[y].title;
+                var ratingA = resp.movies[x].ratings.critics_score;
+                var ratingB = resp.movies[y].ratings.critics_score;
+                $('#movie1').html(movieA);
+                $('#movie2').html(movieB);
+                a = ratingA;
+                b = ratingB;
+                review1 = resp.movies[x].ratings.critics_consensus;
+                review2 = resp.movies[y].ratings.critics_consensus; 
+            },
+            error: function (error) {
+                alert(error);
+            }
+        });
+    };
+
+    $('#start').click(start);
+    $('#next').click(next);
+    $('#movie1').click(initiate1);
+    $('#movie2').click(initiate2);
 });
 
 
